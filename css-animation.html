@@ -1,0 +1,179 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Web Animation Playground</title>
+    <style>
+        html {
+            background: #f7f7f7;
+        }
+
+        body {
+            margin: 0;
+        }
+
+        .container {
+            position: relative;
+            margin: 0 auto;
+            max-width: 1100px;
+            font-family: helvetica, sans-serif;
+        }
+
+        #header {
+            width: 100%;
+            height: 60px;
+            line-height: 60px;
+            background: #222;
+            color: white;
+        }
+
+        #header h1 {
+            text-transform: uppercase;
+            margin: 0;
+        }
+
+        #nav {
+            position: absolute;
+            width: 100%;
+        }
+
+        #nav:before {
+            content: '\2630';
+            position: absolute;
+            right: 3%;
+            top: -50px;
+            line-height: 40px;
+            cursor: pointer;
+            font-size: 1.6em
+        }
+
+        #nav ul {
+            background: #222;
+            width: 100%;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            max-height: 0;
+            opacity: 0;
+        }
+
+        #nav.slide-in ul {
+            animation-name: headerSlider;
+            animation-duration: 1s;
+            animation-fill-mode: forwards;
+            animation-timing-function: linear;
+        }
+
+        #nav.slide-out ul {
+            animation-name: headerSlider;
+            animation-duration: 1s;
+            animation-direction: reverse;
+            animation-fill-mode: forwards;
+            animation-timing-function: linear;
+        }
+
+        #nav ul li {
+            list-style: none;
+        }
+
+        #nav ul li a {
+            display: block;
+            color: white;
+            text-decoration: none;
+            padding: 10px 3%;
+            line-height: 20px;
+            border-top: 1px solid #333;
+        }
+
+        #nav.open ul {
+            max-height: 205px;
+            opacity: 1;
+        }
+
+        .item-block {
+            height: 200px;
+            width: 200px;
+            background: #222;
+            float: left;
+            margin-left: 125px;
+            margin-top: 125px;
+        }
+
+        @keyframes headerSlider {
+            0%   { opacity: 0;    background: #222;    max-height: 0;        }
+            25%  { opacity: 0.25; background: #F11010; max-height: 57.25px;  }
+            50%  { opacity: 0.5;  background: #C2F110; max-height: 105px;    }
+            75%  { opacity: 0.75; background: #4910F1; max-height: 162.25px; }
+            100% { opacity: 1;    background: #222;    max-height: 210px;    }
+        }
+    </style>
+</head>
+<body>
+    <header id="header">
+        <div class="container">
+            <h1>Web Animation</h1>
+            <nav id="nav">
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Basket</a></li>
+                    <li><a href="#">Login</a></li>
+                    <li><a href="#">Register</a></li>
+                </ul>
+            </nav>
+            <div class="item-block"></div>
+            <div class="item-block"></div>
+            <div class="item-block"></div>
+            <div class="item-block"></div>
+            <div class="item-block"></div>
+            <div class="item-block"></div>
+            <div class="item-block"></div>
+            <div class="item-block"></div>
+            <div class="item-block"></div>
+            <div class="item-block"></div>
+            <div class="item-block"></div>
+            <div class="item-block"></div>
+            <div class="item-block"></div>
+            <div class="item-block"></div>
+            <div class="item-block"></div>
+            <div class="item-block"></div>
+            <div class="item-block"></div>
+            <div class="item-block"></div>
+            <div class="item-block"></div>
+            <div class="item-block"></div>
+            <div class="item-block"></div>
+            <div class="item-block"></div>
+            <div class="item-block"></div>
+            <div class="item-block"></div>
+            <div class="item-block"></div>
+            <div class="item-block"></div>
+            <div class="item-block"></div>
+            <div class="item-block"></div>
+            <div class="item-block"></div>
+            <div class="item-block"></div>
+        </div>
+    </header>
+<script>
+    var navigationElement = document.querySelector('#nav');
+    var listElement = document.querySelector('ul');
+
+    navigationElement.addEventListener('click', function() {
+        var animationClass = ( this.classList.contains('open') ) ? 'slide-out' : 'slide-in';
+
+        this.classList.add( animationClass );
+    });
+
+    /**
+     * Apply will-change
+     */
+    listElement.style.willChange = 'opacity, max-height';
+
+    listElement.addEventListener('animationend', function () {
+        navigationElement.classList.remove('slide-in');
+        navigationElement.classList.remove('slide-out');
+        
+        navigationElement.classList.toggle('open');
+    });
+</script>
+</body>
+</html>
